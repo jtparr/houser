@@ -11,11 +11,10 @@ class Dashboard extends Component {
             houseList: []
         }
         this.getHouseList = this.getHouseList.bind(this);
+        this.deleteProperty = this.deleteProperty.bind(this);
     }
 
-    componentDidMount() {
-        this.getHouseList()
-    }
+    //new house list doesn't load when add new property links back to dashboard
 
     getHouseList() {
         let promise = axios.get(`/api/houselist`);
@@ -26,27 +25,37 @@ class Dashboard extends Component {
         })
     }
 
-    render() {
+    deleteProperty(id) {
+        console.log('button works')
+        let promise = axios.delete(`/api/property/${id}`);
+        promise.then(() => {
+         this.getHouseList()
+        })
+    }
+    
+    componentDidMount() {
+        this.getHouseList()
+    }
 
+    render() {
         return (
             <div>
-                Dashboard
             {this.state.houseList.map((val) => {
                     return (
                         <House
                             key={val.id}
+                            id={val.id}
                             name={val.name}
                             address={val.address}
                             city={val.city}
                             propertystate={val.state}
                             zipcode={val.zip}
-
-                        />)
+                            deleteProperty={this.deleteProperty} />)
                 })}
-                <button><Link to='/wizard'>Add New Property</Link></button>
+                <button><Link to='/wizard/step1'>Add New Property</Link></button>
             </div>
         )
     }
 }
 
-export default Dashboard;
+export default (Dashboard);

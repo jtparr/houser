@@ -19,7 +19,7 @@ app.get(`/api/houselist`, controller.getHouseList)
 
 app.post(`/api/property`, controller.addNewProperty)
 
-
+app.delete(`/api/property/:id`, controller.deleteProperty)
 
 app.listen(hiddenPort, () => {
     console.log(`Knock knock knockin' on port ${hiddenPort}'s door`)

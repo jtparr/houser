@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default function House (props) {
+    
+
+    
     return (
         <div>
             <p>Property Name: {props.name}</p>
@@ -8,7 +11,7 @@ export default function House (props) {
             <p>City: {props.city}</p>
             <p>State: {props.propertystate}</p>
             <p>Zipcode: {props.zipcode}</p>
-            <button>Delete</button>
+            <button onClick={() => props.deleteProperty(props.id)}>Delete</button>
             
         </div>
     )
